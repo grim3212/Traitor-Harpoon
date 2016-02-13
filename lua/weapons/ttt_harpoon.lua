@@ -113,6 +113,9 @@ if SERVER then
    -- an icon_ak47, and another server also has one, then players might see the
    -- other server's dumb icon. Avoid this by using a unique name.
    resource.AddFile("materials/VGUI/ttt/icon_ttt_harpoon.vmt")
+   --Add models to client
+   resource.AddFile("models/weapons/ttt_harpoon/v_invisib.mdl")
+   resource.AddFile("models/weapons/ttt_harpoon/w_ttt_harpoon.mdl")
 end
 
 function SWEP:PrimaryAttack()
