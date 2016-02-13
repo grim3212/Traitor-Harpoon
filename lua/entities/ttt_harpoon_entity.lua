@@ -45,6 +45,7 @@ function ENT:Initialize()
 	util.PrecacheSound("physics/flesh/flesh_impact_bullet1.wav")
 	util.PrecacheSound("physics/flesh/flesh_impact_bullet2.wav")
 	util.PrecacheSound("physics/flesh/flesh_impact_bullet3.wav")
+	util.PrecacheSound("weapons/ttt_harpoon/impact.mp3")
 
 	self.Hit = { 
 	Sound("physics/metal/metal_grenade_impact_hard1.wav"),

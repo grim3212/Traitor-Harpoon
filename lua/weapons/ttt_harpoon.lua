@@ -116,13 +116,16 @@ if SERVER then
    --Add models to client
    resource.AddFile("models/weapons/ttt_harpoon/v_invisib.mdl")
    resource.AddFile("models/weapons/ttt_harpoon/w_ttt_harpoon.mdl")
+   --Add sounds
+   resource.AddFile("weapons/ttt_harpoon/deploy.mp3")
+   resource.AddFile("weapons/ttt_harpoon/impact.mp3")
 end
 
 function SWEP:PrimaryAttack()
 	self:FireRocket()
 	self.Owner:SetAnimation( PLAYER_ATTACK1 )
 	self.Weapon:SetNextPrimaryFire(CurTime()+1/1)
-	self.Weapon:EmitSound(Sound("Weapon_Knife.Slash"))
+	self.Weapon:EmitSound(Sound("Weapon_harpoon.Thrown"))
 	self.Weapon:TakePrimaryAmmo(1)
 	self.Weapon:SendWeaponAnim( ACT_VM_HITCENTER )
 	self:CheckWeaponsAndAmmo()
