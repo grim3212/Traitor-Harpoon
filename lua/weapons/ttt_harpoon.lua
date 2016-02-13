@@ -38,23 +38,25 @@ SWEP.IronSightsAng = Vector(0, 0, 0)
 
 -- Model properties
 SWEP.HoldType = "melee"
-SWEP.ViewModelFOV = 70
+SWEP.ViewModelFOV = 61.306532663317
 SWEP.ViewModelFlip = false
 SWEP.UseHands = false
 SWEP.ViewModel = "models/weapons/ttt_harpoon/v_invisib.mdl"
 SWEP.WorldModel = "models/weapons/ttt_harpoon/w_ttt_harpoon.mdl"
+SWEP.ShowViewModel = true
+SWEP.ShowWorldModel = true
 SWEP.ViewModelBoneMods = {
 	["l-upperarm"] = { scale = Vector(1, 1, 1), pos = Vector(-7.223, 1.667, 7.592), angle = Angle(7.777, 0, 0) },
-	["r-upperarm-movement"] = { scale = Vector(1, 1, 1), pos = Vector(-30, -30, -30), angle = Angle(0, 0, 0) },
-	["Da Machete"] = { scale = Vector(1, 1, 1), pos = Vector(-15.37, -6.112, -1.297), angle = Angle(0, 0, 0) },
-	["l-upperarm-movement"] = { scale = Vector(1, 1, 1), pos = Vector(3.615, 0.546, 4.635), angle = Angle(-45.93, -39.95, -76.849) },
-	["l-forearm"] = { scale = Vector(1, 1, 1), pos = Vector(0, 0, 0), angle = Angle(-3.932, -42.389, 171.466) },
 	["lwrist"] = { scale = Vector(1, 1, 1), pos = Vector(0, 0, 0), angle = Angle(-47.502, -5.645, 0.55) },
+	["r-upperarm-movement"] = { scale = Vector(1, 1, 1), pos = Vector(-30, -30, -30), angle = Angle(0, 0, 0) },
+	["l-forearm"] = { scale = Vector(1, 1, 1), pos = Vector(0, 0, 0), angle = Angle(-3.932, -42.389, 171.466) },
+	["l-upperarm-movement"] = { scale = Vector(1, 1, 1), pos = Vector(3.615, 0.546, 4.635), angle = Angle(-45.93, -39.95, -76.849) },
 	["r-upperarm"] = { scale = Vector(1, 1, 1), pos = Vector(0, 0, 0), angle = Angle(7.335, 0, 0) }
 }
 
+
 SWEP.VElements = {
-	["harpoon"] = { type = "Model", model = "models/weapons/ttt_harpoon/w_ttt_harpoon.mdl", bone = "Da Machete", rel = "", pos = Vector(-23.378, 1.557, 23.377), angle = Angle(-26.883, 64.286, -155.456), size = Vector(1.014, 1.014, 1.014), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+	["harpoon"] = { type = "Model", model = "models/weapons/ttt_harpoon/w_ttt_harpoon.mdl", bone = "r-middle-mid", rel = "", pos = Vector(-42.078, -25.455, -21.299), angle = Angle(75.973, 73.636, 162), size = Vector(1.014, 1.014, 1.014), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
 }
 
 -- TTT config values
@@ -136,7 +138,7 @@ function SWEP:FireRocket()
 	rocket:Activate()
 	eyes = self.Owner:EyeAngles()
 		local phys = rocket:GetPhysicsObject()
-			phys:SetVelocity(self.Owner:GetAimVector() * 2000)
+			phys:SetVelocity(self.Owner:GetAimVector() * 3000)
 	end
 		if SERVER and !self.Owner:IsNPC() then
 			local anglo = Angle(-10, -5, 0)
