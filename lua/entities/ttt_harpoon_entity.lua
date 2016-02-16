@@ -111,33 +111,29 @@ function ENT:HitPlayer(other, tr)
    local prints = self.fingerprints
    
    other.effect_fn = function(rag)
+		if not IsValid(harpoon) or not IsValid(rag) then return end
+		harpoon:SetPos(pos)
+        harpoon:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
+        harpoon:SetAngles(ang)
 
-                        if not IsValid(harpoon) or not IsValid(rag) then return end
+        harpoon:SetMoveCollide(MOVECOLLIDE_DEFAULT)
+        harpoon:SetMoveType(MOVETYPE_VPHYSICS)
 
-                        harpoon:SetPos(pos)
-                        harpoon:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
-                        harpoon:SetAngles(ang)
+        harpoon.fingerprints = prints
+        harpoon:SetNWBool("HasPrints", true)
 
-                        harpoon:SetMoveCollide(MOVECOLLIDE_DEFAULT)
-                        harpoon:SetMoveType(MOVETYPE_VPHYSICS)
+        -- harpoon:SetSolid(SOLID_NONE)
+        -- harpoon needs to be trace-able to get prints
+        local phys = harpoon:GetPhysicsObject()
+        if IsValid(phys) then
+            phys:EnableCollisions(false)
+        end
 
-                        harpoon.fingerprints = prints
-                        harpoon:SetNWBool("HasPrints", true)
+        constraint.Weld(rag, harpoon, bone, 0, 0, true)
 
-                        -- harpoon:SetSolid(SOLID_NONE)
-                        -- harpoon needs to be trace-able to get prints
-                        local phys = harpoon:GetPhysicsObject()
-                        if IsValid(phys) then
-                           phys:EnableCollisions(false)
-                        end
-
-                        constraint.Weld(rag, harpoon, bone, 0, 0, true)
-
-						--Use the same as knives on cleanup
-                        rag:CallOnRemove("ttt_knife_cleanup", function() SafeRemoveEntity(knife) end)
-                    end
-
-
+		--Use the same as knives on cleanup
+        rag:CallOnRemove("ttt_knife_cleanup", function() SafeRemoveEntity(knife) end)
+    end
    other:DispatchTraceAttack(dmg, self:GetPos() + ang:Forward() * 3, other:GetPos())
 
    self.Stuck = true
