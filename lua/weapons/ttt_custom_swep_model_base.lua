@@ -27,7 +27,7 @@ SWEP.Base = "weapon_tttbase"
 
 function SWEP:Initialize()
 
-	// other initialize code goes here
+	// other initialize code goes 
 	
 	self:SetHoldType(self.HoldType)
 

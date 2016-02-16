@@ -39,23 +39,8 @@ function ENT:Initialize()
 	
 	self.InFlight = true
 
-	util.PrecacheSound("physics/metal/metal_grenade_impact_hard3.wav")
-	util.PrecacheSound("physics/metal/metal_grenade_impact_hard2.wav")
-	util.PrecacheSound("physics/metal/metal_grenade_impact_hard1.wav")
-	util.PrecacheSound("physics/flesh/flesh_impact_bullet1.wav")
-	util.PrecacheSound("physics/flesh/flesh_impact_bullet2.wav")
-	util.PrecacheSound("physics/flesh/flesh_impact_bullet3.wav")
 	util.PrecacheSound("weapons/ttt_harpoon/impact.mp3")
-
-	self.Hit = { 
-	Sound("physics/metal/metal_grenade_impact_hard1.wav"),
-	Sound("physics/metal/metal_grenade_impact_hard2.wav"),
-	Sound("physics/metal/metal_grenade_impact_hard3.wav")};
-
-	self.FleshHit = { 
-	Sound("physics/flesh/flesh_impact_bullet1.wav"),
-	Sound("physics/flesh/flesh_impact_bullet2.wav"),
-	Sound("physics/flesh/flesh_impact_bullet3.wav")}
+	util.PrecacheSound("weapons/ttt_harpoon/nastystab.mp3")
 
 	self:GetPhysicsObject():SetMass(2)	
 
@@ -102,7 +87,7 @@ end
    Name: ENT:HitPlayer()
 ---------------------------------------------------------*/
 function ENT:HitPlayer(other, tr)
-	self:EmitSound(self.FleshHit[math.random(1,#self.Hit)])
+	self:EmitSound("weapons/ttt_harpoon/nastystab.mp3")
 	self:Disable()
 
 	--Kill the player
@@ -174,12 +159,12 @@ function ENT:PhysicsCollide(data, phys)
 
 	if Ent:IsWorld() and self.InFlight then
 			if data.Speed > 500 then
-				self:EmitSound(Sound("weapons/ttt_harpoon/impact.mp3"))
+				self:EmitSound("weapons/ttt_harpoon/impact.mp3")
 				self:SetPos(data.HitPos - data.HitNormal * 10)
 				self:SetAngles(self.Entity:GetAngles())
 				self:GetPhysicsObject():EnableMotion(false)
 			else
-				self:EmitSound(self.Hit[math.random(1, #self.Hit)])
+				self:EmitSound("weapons/ttt_harpoon/impact.mp3")
 			end
 
 			self:Disable()
@@ -190,7 +175,7 @@ function ENT:PhysicsCollide(data, phys)
 			self:SetPos(data.HitPos - data.HitNormal * 10)
 			self:SetAngles(self.Entity:GetAngles())
 			self:SetParent(Ent)
-			self:EmitSound(self.Hit[math.random(1, #self.Hit)])
+			self:EmitSound("weapons/ttt_harpoon/impact.mp3")
 			self:Disable()
 		end
 
@@ -215,7 +200,7 @@ function ENT:PhysicsCollide(data, phys)
 			effectdata:SetScale(1)
 			util.Effect("BloodImpact", effectdata)
 			
-			self:EmitSound(self.FleshHit[math.random(1,#self.Hit)])
+			self:EmitSound("weapons/ttt_harpoon/nastystab.mp3")
 			self:Disable()
 			
 			--self.Entity:GetPhysicsObject():SetVelocity(data.OurOldVelocity / 4)

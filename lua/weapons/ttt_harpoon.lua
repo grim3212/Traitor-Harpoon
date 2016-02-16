@@ -93,39 +93,11 @@ SWEP.IsSilent = true
 -- If NoSights is true, the weapon won't have ironsights
 SWEP.NoSights = false
 
--- Precache custom sounds
-function SWEP:Precache()
-   util.PrecacheSound( "weapons/ttt_harpoon/deploy.mp3" )
-end
-
--- Give the primary sound an alias
-sound.Add ( {
-   name = "Weapon_harpoon.Thrown",
-   channel = CHAN_USER_BASE + 10,
-   volume = 1.0,
-   sound = "weapons/ttt_harpoon/deploy.mp3"
-} )
-
--- Tell the server that it should download our icon to clients.
-if SERVER then
-   -- It's important to give your icon a unique name. GMod does NOT check for
-   -- file differences, it only looks at the name. This means that if you have
-   -- an icon_ak47, and another server also has one, then players might see the
-   -- other server's dumb icon. Avoid this by using a unique name.
-   resource.AddFile("materials/VGUI/ttt/icon_ttt_harpoon.vmt")
-   --Add models to client
-   resource.AddFile("models/weapons/ttt_harpoon/v_invisib.mdl")
-   resource.AddFile("models/weapons/ttt_harpoon/w_ttt_harpoon.mdl")
-   --Add sounds
-   resource.AddFile("weapons/ttt_harpoon/deploy.mp3")
-   resource.AddFile("weapons/ttt_harpoon/impact.mp3")
-end
-
 function SWEP:PrimaryAttack()
 	self:FireRocket()
 	self.Owner:SetAnimation( PLAYER_ATTACK1 )
 	self.Weapon:SetNextPrimaryFire(CurTime()+1/1)
-	self.Weapon:EmitSound(Sound("Weapon_harpoon.Thrown"))
+	self.Weapon:EmitSound("weapons/ttt_harpoon/deploy.mp3")
 	self.Weapon:TakePrimaryAmmo(1)
 	self.Weapon:SendWeaponAnim( ACT_VM_HITCENTER )
 	self:CheckWeaponsAndAmmo()
